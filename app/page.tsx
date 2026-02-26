@@ -90,7 +90,7 @@ export default function Home() {
             variants={containerVariants}
           >
             <motion.section id="hero" className="relative" variants={itemVariants}>
-              <img src="/hero_ukiyo.webp" alt="navi_hero_ukiyo" className="w-full h-fit"/>
+              <img src="/hero_ukiyo.webp" fetchPriority="high" alt="navi_hero_ukiyo" className="w-full h-fit"/>
               {/* <span className="absolute top-8 left-10">{thingy[0]} personal agentic system {thingy[1]}</span> */}
             </motion.section>
             
