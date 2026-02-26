@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
+import { Spinner } from "@/components/ui/spinner"
 
 interface InviteModalProps {
   open: boolean
@@ -140,7 +141,14 @@ export function InviteModal({ open, onClose, onSuccess, storedEmail }: InviteMod
                   disabled={isSubmitting} 
                   className="w-full rounded-xl bg-foreground text-background font-semibold hover:bg-foreground/90 transition-all active:scale-95 py-5 text-base"
                 >
-                  {isSubmitting ? "Joining..." : "Get Navi"}
+                  {isSubmitting ? (
+                    <>
+                      <Spinner />
+                      Adding you...
+                    </>
+                  ) : (
+                    "Get Navi"
+                  )}
                 </Button>
               </form>
               </div>

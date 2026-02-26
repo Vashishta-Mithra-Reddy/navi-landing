@@ -33,10 +33,10 @@ export default function Home() {
       <div className="pt-2">
         {storedEmail ? (
           <div className="grid gap-2">
-            <Button className="bg-foreground text-background text-lg" size="lg" disabled>
+            <Button className="bg-foreground text-background text-lg px-4 py-5 w-fit" size="lg" disabled>
               Invite requested
             </Button>
-            <p className="text-xs text-muted-foreground">Already on the list as {storedEmail}.</p>
+            <p className="text-xs text-muted-foreground">{thingy[0]} Already on the list as {storedEmail}. {thingy[1]}</p>
           </div>
         ) : (
           <>
@@ -45,7 +45,7 @@ export default function Home() {
               size="lg"
               onClick={() => setOpen(true)}
             >
-              Get an invite
+              Get an invite;
             </Button>
             <InviteModal 
               open={open} 
