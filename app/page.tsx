@@ -22,7 +22,7 @@ export default function Home() {
   }
 
   return (
-    <div className="max-w-4xl w-full mx-auto py-2 md:py-4 px-4 bg-background flex flex-col gap-5 border border-t-0">
+    <div className="max-w-4xl w-full mx-auto py-2 md:py-4 px-4 bg-background flex flex-col gap-5 border border-t-0 border-dashed">
       <section id="hero" className="relative">
       <img src="/hero_ukiyo.webp" alt="navi_hero_ukiyo" className="w-full h-fit"/>
       {/* <span className="absolute top-8 left-10">{thingy[0]} personal agentic system {thingy[1]}</span> */}
