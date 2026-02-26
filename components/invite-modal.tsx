@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect, useCallback } from "react"
+import { createPortal } from "react-dom"
 import { AnimatePresence, motion } from "framer-motion"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
@@ -16,6 +17,7 @@ interface InviteModalProps {
 export function InviteModal({ open, onClose, onSuccess, storedEmail }: InviteModalProps) {
   const [email, setEmail] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [mounted, setMounted] = useState(false)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -60,6 +62,10 @@ export function InviteModal({ open, onClose, onSuccess, storedEmail }: InviteMod
   }, [onClose])
 
   useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
     if (open) {
       document.addEventListener("keydown", handleKeyDown)
       // Prevent body scrolling when modal is open
@@ -75,7 +81,9 @@ export function InviteModal({ open, onClose, onSuccess, storedEmail }: InviteMod
     }
   }, [open, handleKeyDown])
 
-  return (
+  if (!mounted) return null
+
+  return createPortal(
     <AnimatePresence>
       {open && (
         <motion.div
@@ -156,6 +164,7 @@ export function InviteModal({ open, onClose, onSuccess, storedEmail }: InviteMod
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   )
 }

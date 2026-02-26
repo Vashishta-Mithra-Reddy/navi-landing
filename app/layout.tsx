@@ -4,7 +4,6 @@ import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 
 import "./globals.css";
 import Providers from "@/components/providers";
-import Header from "@/components/blocks/header";
 
 const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
@@ -28,7 +27,6 @@ export default function RootLayout({
       <body className={`${jakarta.variable} antialiased`}>
         <Providers>
           <div className="grid grid-rows-[auto_1fr] min-h-svh">
-            <Header />
             {children}
           </div>
         </Providers>
