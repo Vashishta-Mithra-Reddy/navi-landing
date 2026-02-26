@@ -106,6 +106,7 @@ export function InviteModal({ open, onClose, onSuccess, storedEmail }: InviteMod
                <img 
                 src="/invite.webp" 
                 alt="Invite background" 
+                fetchPriority="high"
                 className="w-full h-auto select-none pointer-events-none block"
                 draggable={false}
               />
