@@ -39,7 +39,7 @@ export function ThemeSwitcher() {
             alt="navi_logo" 
             width={40} 
             height={40} 
-            className="w-8 md:w-10 h-8 md:h-10 bg-white rounded-lg group-hover:scale-100 transition-transform duration-300 shadow-sm"
+            className="w-8 md:w-10 h-8 md:h-10 bg-white rounded-lg group-hover:scale-100 active:scale-90 transition-all duration-300 shadow-sm"
           />
         </div>
     </>
