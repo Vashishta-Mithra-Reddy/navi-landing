@@ -23,8 +23,8 @@ export function ThemeSwitcher() {
     );
   }
 
-  const toggleTheme = () => {
-    toggleThemeFromSkiper();
+  const toggleTheme = (e: React.MouseEvent) => {
+    toggleThemeFromSkiper(e);
     click();
   };
 

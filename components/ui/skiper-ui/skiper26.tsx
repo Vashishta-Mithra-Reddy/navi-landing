@@ -483,10 +483,21 @@ export const useThemeToggle = ({
     styleElement.textContent = css;
   }, []);
 
-  const toggleTheme = useCallback(() => {
+  const toggleTheme = useCallback((e?: React.MouseEvent | React.TouchEvent) => {
     setIsDark(!isDark);
 
-    const animation = createAnimation(variant, start, blur, gifUrl);
+    let coords = undefined;
+    if (e) {
+      // @ts-ignore
+      const x = e.clientX ?? e.touches?.[0]?.clientX;
+      // @ts-ignore
+      const y = e.clientY ?? e.touches?.[0]?.clientY;
+      if (x !== undefined && y !== undefined) {
+        coords = { x, y };
+      }
+    }
+
+    const animation = createAnimation(variant, start, blur, gifUrl, coords);
 
     updateStyles(animation.css, animation.name);
 
@@ -758,6 +769,7 @@ export const createAnimation = (
   start: AnimationStart = "center",
   blur = false,
   url?: string,
+  coords?: { x: number; y: number },
 ): Animation => {
   const svg = generateSVG(variant, start);
   const transformOrigin = getTransformOrigin(start);
@@ -956,19 +968,19 @@ export const createAnimation = (
         css: `
         ::view-transition-group(root) {
         animation-timing-function: var(--expo-out);
-        animation-duration: 2s;
+        animation-duration: 2.5s;
       }
 
       ::view-transition-new(root) {
         mask: url('${svg}') center / 0 no-repeat;
         mask-origin: content-box;
-        animation: scale 2s;
+        animation: scale 2.5s;
         transform-origin: center;
       }
 
       ::view-transition-old(root),
       .dark::view-transition-old(root) {
-        animation: scale 2s;
+        animation: scale 2.5s;
         transform-origin: center;
         z-index: -1;
       }
@@ -987,19 +999,19 @@ export const createAnimation = (
       css: `
       ::view-transition-group(root) {
         animation-timing-function: var(--expo-out);
-        animation-duration: 2s;
+        animation-duration: 2.5s;
       }
 
       ::view-transition-new(root) {
         mask: url('${svg}') ${start.replace("-", " ")} / 0 no-repeat;
         mask-origin: content-box;
-        animation: scale 2s;
+        animation: scale 2.5s;
         transform-origin: ${transformOrigin};
       }
 
       ::view-transition-old(root),
       .dark::view-transition-old(root) {
-        animation: scale 2s;
+        animation: scale 2.5s;
         transform-origin: ${transformOrigin};
         z-index: -1;
       }
@@ -1096,6 +1108,9 @@ export const createAnimation = (
   // Handle circle variants with start positions using clip-path
   if (variant === "circle" && start !== "center") {
     const getClipPathPosition = (position: AnimationStart) => {
+      if (coords) {
+        return `${coords.x}px ${coords.y}px`;
+      }
       switch (position) {
         case "top-left":
           return "0% 0%";
@@ -1120,7 +1135,7 @@ export const createAnimation = (
       name: `${variant}-${start}${blur ? "-blur" : ""}`,
       css: `
        ::view-transition-group(root) {
-        animation-duration: 2s;
+        animation-duration: 2.5s;
         animation-timing-function: var(--expo-out);
       }
             
@@ -1146,7 +1161,7 @@ export const createAnimation = (
         }
         ${blur ? "50% { filter: blur(4px); }" : ""}
         to {
-          clip-path: circle(150.0% at ${clipPosition});
+          clip-path: circle(200% at ${clipPosition});
           ${blur ? "filter: blur(0px);" : ""}
         }
       }
@@ -1158,7 +1173,7 @@ export const createAnimation = (
         }
         ${blur ? "50% { filter: blur(4px); }" : ""}
         to {
-          clip-path: circle(150.0% at ${clipPosition});
+          clip-path: circle(200% at ${clipPosition});
           ${blur ? "filter: blur(0px);" : ""}
         }
       }
@@ -1171,18 +1186,18 @@ export const createAnimation = (
     css: `
       ::view-transition-group(root) {
         animation-timing-function: var(--expo-in);
-        animation-duration: 2s;
+        animation-duration: 2.5s;
       }
       ::view-transition-new(root) {
         mask: url('${svg}') ${start.replace("-", " ")} / 0 no-repeat;
         mask-origin: content-box;
-        animation: scale-${start}${blur ? "-blur" : ""} 2s;
+        animation: scale-${start}${blur ? "-blur" : ""} 2.5s;
         transform-origin: ${transformOrigin};
         ${blur ? "filter: blur(2px);" : ""}
       }
       ::view-transition-old(root),
       .dark::view-transition-old(root) {
-        animation: scale-${start}${blur ? "-blur" : ""} 2s;
+        animation: scale-${start}${blur ? "-blur" : ""} 2.5s;
         transform-origin: ${transformOrigin};
         z-index: -1;
       }
