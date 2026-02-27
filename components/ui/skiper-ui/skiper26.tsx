@@ -955,22 +955,23 @@ export const createAnimation = (
         name: `${variant}-${start}`,
         css: `
         ::view-transition-group(root) {
-          animation-timing-function: var(--expo-out);
-        }
+        animation-timing-function: var(--expo-out);
+        animation-duration: 2s;
+      }
 
-        ::view-transition-new(root) {
-          mask: url('${svg}') center / 0 no-repeat;
-          mask-origin: content-box;
-          animation: scale 1s;
-          transform-origin: center;
-        }
+      ::view-transition-new(root) {
+        mask: url('${svg}') center / 0 no-repeat;
+        mask-origin: content-box;
+        animation: scale 2s;
+        transform-origin: center;
+      }
 
-        ::view-transition-old(root),
-        .dark::view-transition-old(root) {
-          animation: scale 1s;
-          transform-origin: center;
-          z-index: -1;
-        }
+      ::view-transition-old(root),
+      .dark::view-transition-old(root) {
+        animation: scale 2s;
+        transform-origin: center;
+        z-index: -1;
+      }
 
         @keyframes scale {
           to {
@@ -986,18 +987,19 @@ export const createAnimation = (
       css: `
       ::view-transition-group(root) {
         animation-timing-function: var(--expo-out);
+        animation-duration: 2s;
       }
 
       ::view-transition-new(root) {
         mask: url('${svg}') ${start.replace("-", " ")} / 0 no-repeat;
         mask-origin: content-box;
-        animation: scale 1s;
+        animation: scale 2s;
         transform-origin: ${transformOrigin};
       }
 
       ::view-transition-old(root),
       .dark::view-transition-old(root) {
-        animation: scale 1s;
+        animation: scale 2s;
         transform-origin: ${transformOrigin};
         z-index: -1;
       }
@@ -1118,7 +1120,7 @@ export const createAnimation = (
       name: `${variant}-${start}${blur ? "-blur" : ""}`,
       css: `
        ::view-transition-group(root) {
-        animation-duration: 1s;
+        animation-duration: 2s;
         animation-timing-function: var(--expo-out);
       }
             
@@ -1169,17 +1171,18 @@ export const createAnimation = (
     css: `
       ::view-transition-group(root) {
         animation-timing-function: var(--expo-in);
+        animation-duration: 2s;
       }
       ::view-transition-new(root) {
         mask: url('${svg}') ${start.replace("-", " ")} / 0 no-repeat;
         mask-origin: content-box;
-        animation: scale-${start}${blur ? "-blur" : ""} 1s;
+        animation: scale-${start}${blur ? "-blur" : ""} 2s;
         transform-origin: ${transformOrigin};
         ${blur ? "filter: blur(2px);" : ""}
       }
       ::view-transition-old(root),
       .dark::view-transition-old(root) {
-        animation: scale-${start}${blur ? "-blur" : ""} 1s;
+        animation: scale-${start}${blur ? "-blur" : ""} 2s;
         transform-origin: ${transformOrigin};
         z-index: -1;
       }

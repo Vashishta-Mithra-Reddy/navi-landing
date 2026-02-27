@@ -126,6 +126,10 @@
   html {
     @apply font-jakarta;
   }
+  
+  ::selection {
+    @apply bg-foreground text-background;
+  }
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
