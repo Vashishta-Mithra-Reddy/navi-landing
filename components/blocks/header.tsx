@@ -12,7 +12,15 @@ export default function Header() {
   return (
     <header className="w-full border-0 border-t-0">
       <div className="flex items-center justify-between max-w-4xl w-full mx-auto pt-3 md:pt-5 pb-4 md:pb-6 px-6 md:px-8 border border-t-0 border-dashed">
-        <ThemeSwitcher />
+        <div className="flex items-center gap-4 md:gap-6">
+          <ThemeSwitcher />
+          <Link 
+            href="/features" 
+            className="text-md font-semibold md:text-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            features
+          </Link>
+        </div>
         <motion.p 
           layoutId="navi-logo-text"
           className="text-3xl md:text-4xl text-muted-foreground tracking-tighter font-bold relative z-10"

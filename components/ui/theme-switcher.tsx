@@ -2,6 +2,7 @@
 import * as React from "react";
 import useSound from "use-sound";
 import { useThemeToggle } from "@/components/ui/skiper-ui/skiper26";
+import { motion } from "framer-motion";
 
 export function ThemeSwitcher() {
   const { isDark, toggleTheme: toggleThemeFromSkiper } = useThemeToggle({
@@ -17,7 +18,9 @@ export function ThemeSwitcher() {
   }, []);
 
   if (!mounted) {
-    return null;
+    return (
+      <div className="w-8 md:w-10 h-8 md:h-10 p-0" />
+    );
   }
 
   const toggleTheme = () => {
@@ -31,7 +34,7 @@ export function ThemeSwitcher() {
           className={`flex items-center gap-2 rounded-xl p-0 text-center transition-all duration-300 hover:bg-foreground/5 relative cursor-pointer group`}
           onClick={toggleTheme}
         >
-          <img 
+          <motion.img 
             src="/logo.png" 
             alt="navi_logo" 
             width={40} 
